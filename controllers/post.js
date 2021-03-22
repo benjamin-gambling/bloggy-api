@@ -62,7 +62,7 @@ const createPost = [
     Posts.findOne({ title, author: req.user._id }).exec((err, prevPost) => {
       !prevPost
         ? Posts.create(
-            { title, content, author: req.user._id, published },
+            { title, image, content, author: req.user._id, published },
             (err, post) => {
               if (err) return res.status(400).json(err);
               post.populate("author", (err, newPost) => {
@@ -89,7 +89,7 @@ const editPost = [
     const { title, content } = req.body;
     Posts.findOneAndUpdate(
       { _id: req.params.postId },
-      { title, content },
+      { title, image, content },
       { useFindAndModify: false, new: true },
       (err, post) => {
         if (err) return res.status(400).json(err);

@@ -4,7 +4,6 @@ import express from "express";
 
 import mongoose from "mongoose";
 import passport from "passport";
-import jwt from "jsonwebtoken";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
 import bcrypt from "bcrypt";
@@ -28,7 +27,6 @@ passport.use(
     },
     (email, password, done) => {
       Users.findOne({ email }, (err, user) => {
-        console.log(err, user);
         if (err) return done(err);
         if (!user)
           return done(null, false, { message: "Email does not exist!" });
