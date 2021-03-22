@@ -57,7 +57,7 @@ const createPost = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res, json(errors.array());
 
-    const { title, content, published } = req.body;
+    const { title, image, content, published } = req.body;
 
     Posts.findOne({ title, author: req.user._id }).exec((err, prevPost) => {
       !prevPost
@@ -86,7 +86,7 @@ const editPost = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res, json(errors.array());
 
-    const { title, content } = req.body;
+    const { title, image, content } = req.body;
     Posts.findOneAndUpdate(
       { _id: req.params.postId },
       { title, image, content },
